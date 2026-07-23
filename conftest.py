@@ -8,17 +8,6 @@ from pages.locators import Locators
 from pages.progress_bar_page import ProgressBarPage
 from pages.sample_app_page import SampleAppPage
 
-"""
-Root fixtures, equivalent to the C# project's BaseTest class plus its
-TestContext.Parameters (sourced from live.runsettings).
-
-Parameters can be overridden either via environment variables or via
-pytest command-line options, e.g.:
-
-    ENVIRONMENT=http://uitestingplayground.com/ pytest
-    pytest --login=Viktor --password=pwd --wrong-password=pwd123
-"""
-
 
 def pytest_addoption(parser):
     parser.addoption("--login", action="store", default=os.environ.get("LOGIN", "Viktor"),
@@ -68,7 +57,7 @@ def load_main_page(page, base_url):
 def load_page(page, base_url):
     def _load(chapter: str):
         page.goto(base_url)
-        page.get_by_role("link", name=chapter).click()
+        page.get_by_role("link", name=chapter, exact=True).click()
         expect(page.locator(Locators.header_tag)).to_have_text(chapter)
 
     return _load
