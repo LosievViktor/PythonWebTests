@@ -8,6 +8,7 @@ Python code examples for Web UI Automation Tests made with Playwright library.
 
    ```
    python -m venv .venv
+
   .venv\Scripts\activate
    ```
 
